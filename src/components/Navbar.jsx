@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const carts = useSelector((state) => state.cart.carts);
@@ -8,9 +9,9 @@ function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link className="navbar-brand" to="/">
             Anasayfa
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -25,14 +26,14 @@ function Navbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
+                <Link className="nav-link active" aria-current="page" to="/">
                   Ürünler
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link">
+                <Link className="nav-link" to="/cart">
                   <i className="fa-solid fa-cart-shopping"></i>({cartTotal})
-                </a>
+                </Link>
               </li>
             </ul>
             <form className="d-flex" role="search">

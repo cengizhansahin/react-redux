@@ -7,7 +7,7 @@ import { addToCart } from "../redux/cartSlice";
 function BookList() {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
-  const [quantity, setQuantity] = useState({});
+  const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
     axios
@@ -15,11 +15,17 @@ function BookList() {
       .then((res) => dispatch(setBooks(res.data)));
   }, [dispatch]);
 
-  const handleAddToCart = (book) => {
-    const bookQuantity = quantity[book.id] || 1;
-    dispatch(addToCart({ ...book, quantity: bookQuantity }));
+  const handleQuantityChange = (id, value) => {
+    setQuantities({
+      ...quantities,
+      [id]: value,
+    });
   };
 
+  const handleAddToCart = (book) => {
+    const quantity = quantities[book.id] || 1;
+    dispatch(addToCart({ ...book, quantity: Number(quantity) }));
+  };
   return (
     <div>
       <div className="container">
@@ -39,12 +45,9 @@ function BookList() {
                   <input
                     type="number"
                     min="1"
-                    value={quantity[book.id] || 1}
+                    value={quantities[book.id] || 1}
                     onChange={(e) =>
-                      setQuantity({
-                        ...quantity,
-                        [book.id]: parseInt(e.target.value),
-                      })
+                      handleQuantityChange(book.id, e.target.value)
                     }
                     className="p-2 border rounded mx-2"
                     style={{ fontSize: "12px", width: "60px" }}
