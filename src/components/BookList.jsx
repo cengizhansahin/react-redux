@@ -3,12 +3,17 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../redux/bookSlice";
 import { addToCart } from "../redux/cartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function BookList() {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
   const [quantities, setQuantities] = useState({});
 
+  const handleAlert = () => {
+    toast.success("Ürün sepete eklendi! 👍");
+  };
   useEffect(() => {
     axios
       .get("https://example-data.draftbit.com/books?_limit=10")
@@ -54,7 +59,10 @@ function BookList() {
                   />
                   <button
                     className="btn btn-success"
-                    onClick={() => handleAddToCart(book)}
+                    onClick={() => {
+                      handleAddToCart(book);
+                      handleAlert();
+                    }}
                   >
                     Sepete Ekle
                   </button>

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeFromCart } from "../redux/cartSlice";
+import { toast } from "react-toastify";
 
 function Cart() {
   const navigate = useNavigate();
@@ -9,6 +10,9 @@ function Cart() {
   const dispatch = useDispatch();
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart({ id }));
+  };
+  const handleAlert2 = () => {
+    toast.success("Ürün listeden çıkartıldı! 😞");
   };
 
   return (
@@ -32,7 +36,10 @@ function Cart() {
                     <p className="card-text">Ürün Miktarı: {book.quantity}</p>
                     <button
                       className="btn btn-outline-danger"
-                      onClick={() => handleRemoveFromCart(book.id)}
+                      onClick={() => {
+                        handleRemoveFromCart(book.id);
+                        handleAlert2();
+                      }}
                     >
                       Sepetten Çıkar
                     </button>
