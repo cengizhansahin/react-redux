@@ -1,16 +1,20 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
-  users: [],
+  user: null,
 };
-const cartslice = createSlice({
+const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginSuccess: (state, action) => {},
-    logoutSuccess: (state, action) => {},
+    loginSuccess: (state, action) => {
+      state.user = action.payload;
+    },
+    logoutSuccess: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const {} = cartslice.actions;
-export default cartslice.reducer;
+export const { loginSuccess, logoutSuccess } = userSlice.actions;
+export default userSlice.reducer;
