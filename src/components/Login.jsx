@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginSuccess } from "../redux/userSlice";
+import { loginFail, loginSuccess } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
@@ -34,26 +34,41 @@ function Login() {
     //     console.log(err);
     //     alert("Giriş başarısız.");
     //   });
-
+    /***************************************************************** */
+    // try {
+    //   const response = await axios.post("https://dummyjson.com/auth/login", {
+    //     username,
+    //     password,
+    //   });
+    //   // console.log(response);
+    //   const data = response.data;
+    //   // console.log(data);
+    //   if (data) {
+    //     dispatch(loginSuccess(data));
+    //     navigate("/");
+    //   } else {
+    //     navigate("/login");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+    /***************************************************************** */
     axios
       .post("https://dummyjson.com/auth/login", {
         username,
         password,
       })
       .then((res) => {
-        // console.log(res);
-        if (res.data.token) {
-          dispatch(loginSuccess(res.data.username));
-          // console.log(res.data.username);
+        const data = res.data;
+        if (data.token) {
+          dispatch(loginSuccess(data));
           navigate("/");
         } else {
-          console.log("kullanıcı adı veya parola hatalı");
-          navigate("/login");
+          dispatch(loginFail("Kullanıcı adı veya parola hatalı."));
         }
       })
-      .catch((error) => {
-        console.log(error);
-        navigate("/login");
+      .catch((err) => {
+        dispatch(loginFail("Giriş başarısız: " + err.message));
       });
   };
 

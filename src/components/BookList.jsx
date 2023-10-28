@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBooks } from "../redux/bookSlice";
 import { addToCart } from "../redux/cartSlice";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function BookList() {
   const dispatch = useDispatch();
