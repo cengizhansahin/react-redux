@@ -61,6 +61,7 @@ function Login() {
       .then((res) => {
         const data = res.data;
         if (data.token) {
+          // console.log(data);
           dispatch(loginSuccess(data));
           navigate("/");
         } else {

@@ -1,10 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setFilteredBooks, setInputGirdi } from "../redux/bookSlice";
 
 function Navbar() {
+  const dispatch = useDispatch();
   const carts = useSelector((state) => state.cart.carts);
   const cartTotal = carts.reduce((total, item) => total + item.quantity, 0);
+  const books = useSelector((state) => state.book.books);
+
+  const handleSeacrh = (e) => {
+    const inputValue = e.target.value;
+    dispatch(setInputGirdi(inputValue));
+    if (inputValue) {
+      const filtredKitap = books.filter((book) =>
+        book.title.toLowerCase().includes(inputValue.toLowerCase())
+      );
+      dispatch(setFilteredBooks(filtredKitap));
+    } else {
+      dispatch(setFilteredBooks([]));
+    }
+  };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -36,12 +51,17 @@ function Navbar() {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form
+              className="d-flex"
+              role="search"
+              onSubmit={(e) => e.preventDefault()}
+            >
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={handleSeacrh}
               />
               <button className="btn btn-outline-success" type="submit">
                 Search

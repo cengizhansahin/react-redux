@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import Login from "./components/Login";
 import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
+import KitapDetay from "./components/KitapDetay";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -18,6 +19,10 @@ function App() {
       <Routes>
         <Route path="/" element={user ? <BookList /> : <Login />} />
         <Route path="/cart" element={user ? <Cart /> : <Login />} />
+        <Route
+          path="/kitapdetay/:id"
+          element={user ? <KitapDetay /> : <Login />}
+        />
       </Routes>
       <Footer />
     </div>

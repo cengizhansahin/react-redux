@@ -29,7 +29,7 @@ function Cart() {
                     height={300}
                     alt="Card image cap"
                     style={{ cursor: "pointer" }}
-                    onClick={() => navigate(`/urundetay/${book.id}`)}
+                    onClick={() => navigate(`/kitapdetay/${book.id}`)}
                   />
                   <div className="card-body">
                     <h5 className="card-title text-truncate">{book.title}</h5>
