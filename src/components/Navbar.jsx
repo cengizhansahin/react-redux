@@ -17,13 +17,14 @@ function Navbar() {
       );
       dispatch(setFilteredBooks(filtredKitap));
     } else {
-      dispatch(setFilteredBooks([]));
+      dispatch(setFilteredBooks(null));
     }
   };
   const handleInputChange = (e) => {
-    const inputValue = e.target.value;
+    var inputValue = e.target.value;
     dispatch(setInputGirdi(inputValue));
   };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">

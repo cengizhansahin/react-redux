@@ -10,7 +10,6 @@ function BookList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
-  // const inputGirdi = useSelector((state) => state.book.inputGirdi);
   const filteredBooks = useSelector((state) => state.book.filteredBooks);
 
   const [quantities, setQuantities] = useState({});
@@ -36,14 +35,16 @@ function BookList() {
     dispatch(addToCart({ ...book, quantity: Number(quantity) }));
   };
 
-  const displayBooks = filteredBooks.length > 0 ? filteredBooks : books;
+  /********************************************************************************* */
+
+  const displayBooks = filteredBooks ? filteredBooks : books;
 
   return (
     <div>
       <div className="container">
         <div className="row justify-content-center">
           {displayBooks.map((book) => (
-            <div className="col-lg-3 col-md-4 col-sm-12 my-3" key={book.id}>
+            <div className="col-lg-3 col-md-4 col-sm-12 my-3">
               <div className="card m-auto rounded shadow">
                 <img
                   className="card-img-top"

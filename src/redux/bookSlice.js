@@ -2,7 +2,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
   books: [],
-  filteredBooks: [],
+  filteredBooks: null,
   inputGirdi: "",
 };
 const bookSlice = createSlice({
