@@ -10,7 +10,7 @@ function BookList() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const books = useSelector((state) => state.book.books);
-  const inputGirdi = useSelector((state) => state.book.inputGirdi);
+  // const inputGirdi = useSelector((state) => state.book.inputGirdi);
   const filteredBooks = useSelector((state) => state.book.filteredBooks);
 
   const [quantities, setQuantities] = useState({});
@@ -36,7 +36,7 @@ function BookList() {
     dispatch(addToCart({ ...book, quantity: Number(quantity) }));
   };
 
-  const displayBooks = inputGirdi ? filteredBooks : books;
+  const displayBooks = filteredBooks.length > 0 ? filteredBooks : books;
 
   return (
     <div>

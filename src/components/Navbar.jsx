@@ -7,18 +7,22 @@ function Navbar() {
   const carts = useSelector((state) => state.cart.carts);
   const cartTotal = carts.reduce((total, item) => total + item.quantity, 0);
   const books = useSelector((state) => state.book.books);
+  const inputGirdi = useSelector((state) => state.book.inputGirdi);
 
-  const handleSeacrh = (e) => {
-    const inputValue = e.target.value;
-    dispatch(setInputGirdi(inputValue));
-    if (inputValue) {
+  const handleDisplay = () => {
+    dispatch(setInputGirdi(inputGirdi));
+    if (inputGirdi) {
       const filtredKitap = books.filter((book) =>
-        book.title.toLowerCase().includes(inputValue.toLowerCase())
+        book.title.toLowerCase().includes(inputGirdi.toLowerCase())
       );
       dispatch(setFilteredBooks(filtredKitap));
     } else {
       dispatch(setFilteredBooks([]));
     }
+  };
+  const handleInputChange = (e) => {
+    const inputValue = e.target.value;
+    dispatch(setInputGirdi(inputValue));
   };
   return (
     <div>
@@ -61,9 +65,13 @@ function Navbar() {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
-                onChange={handleSeacrh}
+                onChange={handleInputChange}
               />
-              <button className="btn btn-outline-success" type="submit">
+              <button
+                className="btn btn-outline-success"
+                type="button"
+                onClick={handleDisplay}
+              >
                 Search
               </button>
             </form>
