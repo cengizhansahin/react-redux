@@ -11,6 +11,10 @@ function Navbar() {
 
   const [inputValue, setInputValue] = useState("");
 
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   const handleDisplay = () => {
     if (inputValue) {
       const filtredKitap = books.filter((book) =>
@@ -21,9 +25,6 @@ function Navbar() {
       dispatch(setFilteredBooks(null));
     }
     setInputValue("");
-  };
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
   };
 
   return (
