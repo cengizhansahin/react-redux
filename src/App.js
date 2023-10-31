@@ -11,17 +11,17 @@ import "react-toastify/dist/ReactToastify.css";
 import KitapDetay from "./components/KitapDetay";
 
 function App() {
-  const user = useSelector((state) => state.user.user);
+  const users = useSelector((state) => state.user.users);
   return (
     <div className="App">
       <Navbar />
       <ToastContainer />
       <Routes>
-        <Route path="/" element={user ? <BookList /> : <Login />} />
-        <Route path="/cart" element={user ? <Cart /> : <Login />} />
+        <Route path="/" element={users ? <BookList /> : <Login />} />
+        <Route path="/cart" element={users ? <Cart /> : <Login />} />
         <Route
           path="/kitapdetay/:id"
-          element={user ? <KitapDetay /> : <Login />}
+          element={users ? <KitapDetay /> : <Login />}
         />
       </Routes>
       <Footer />
