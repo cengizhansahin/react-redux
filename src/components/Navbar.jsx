@@ -70,7 +70,10 @@ function Navbar() {
             <form
               className="d-flex"
               role="search"
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleDisplay();
+              }}
             >
               <input
                 className="form-control me-2"
