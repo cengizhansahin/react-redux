@@ -17,5 +17,5 @@ const bookSlice = createSlice({
   },
 });
 
-export const { setBooks, setFilteredBooks, setInputGirdi } = bookSlice.actions;
+export const { setBooks, setFilteredBooks } = bookSlice.actions;
 export default bookSlice.reducer;

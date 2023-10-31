@@ -2,11 +2,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginSuccess } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setpassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -39,8 +41,10 @@ function Login() {
           // console.log(data);
           // console.log(data.token);
           dispatch(loginSuccess(data));
+          navigate("/");
         } else {
           // alert("Kullanıcı adı ya da parola hatalı.");
+          return;
         }
       })
       .catch((err) => {
