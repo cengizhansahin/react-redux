@@ -30,7 +30,11 @@ function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link
+            className="navbar-brand"
+            to="/"
+            onClick={() => dispatch(setFilteredBooks(null))}
+          >
             Anasayfa
           </Link>
           <button
