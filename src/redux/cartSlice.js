@@ -16,7 +16,6 @@ const cartslice = createSlice({
       } else {
         state.carts.push(action.payload);
       }
-      state.totalQuantity += action.payload.quantity;
     },
 
     removeFromCart: (state, action) => {

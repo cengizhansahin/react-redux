@@ -14,9 +14,6 @@ function BookList() {
 
   const [quantities, setQuantities] = useState({});
 
-  const handleAlert = () => {
-    toast.success("Ürün sepete eklendi! 👍");
-  };
   useEffect(() => {
     axios
       .get("https://example-data.draftbit.com/books?_limit=10")
@@ -33,6 +30,10 @@ function BookList() {
   const handleAddToCart = (book) => {
     const quantity = quantities[book.id] || 1;
     dispatch(addToCart({ ...book, quantity: Number(quantity) }));
+  };
+
+  const handleAlert = () => {
+    toast.success("Ürün sepete eklendi! 👍");
   };
 
   /********************************************************************************* */

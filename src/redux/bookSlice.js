@@ -3,7 +3,6 @@ const { createSlice } = require("@reduxjs/toolkit");
 const initialState = {
   books: [],
   filteredBooks: null,
-  inputGirdi: "",
 };
 const bookSlice = createSlice({
   name: "book",
@@ -14,9 +13,6 @@ const bookSlice = createSlice({
     },
     setFilteredBooks: (state, action) => {
       state.filteredBooks = action.payload;
-    },
-    setInputGirdi: (state, action) => {
-      state.inputGirdi = action.payload;
     },
   },
 });

@@ -1,28 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setFilteredBooks, setInputGirdi } from "../redux/bookSlice";
+import { setFilteredBooks } from "../redux/bookSlice";
+import { useState } from "react";
 
 function Navbar() {
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.cart.carts);
   const cartTotal = carts.reduce((total, item) => total + item.quantity, 0);
   const books = useSelector((state) => state.book.books);
-  const inputGirdi = useSelector((state) => state.book.inputGirdi);
+
+  const [inputValue, setInputValue] = useState("");
 
   const handleDisplay = () => {
-    dispatch(setInputGirdi(inputGirdi));
-    if (inputGirdi) {
+    if (inputValue) {
       const filtredKitap = books.filter((book) =>
-        book.title.toLowerCase().includes(inputGirdi.toLowerCase())
+        book.title.toLowerCase().includes(inputValue.toLowerCase())
       );
       dispatch(setFilteredBooks(filtredKitap));
     } else {
       dispatch(setFilteredBooks(null));
     }
+    setInputValue("");
   };
   const handleInputChange = (e) => {
-    var inputValue = e.target.value;
-    dispatch(setInputGirdi(inputValue));
+    setInputValue(e.target.value);
   };
 
   return (
@@ -71,6 +72,7 @@ function Navbar() {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={inputValue}
                 onChange={handleInputChange}
               />
               <button
