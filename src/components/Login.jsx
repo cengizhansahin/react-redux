@@ -1,40 +1,15 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loginFail, loginSuccess } from "../redux/userSlice";
-import { useNavigate } from "react-router-dom";
+import { loginSuccess } from "../redux/userSlice";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setpassword] = useState("");
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // fetch("https://dummyjson.com/auth/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     username: username,
-    //     password: password,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.token) {
-    //       dispatch(loginSuccess(data.username));
-    //       navigate("/");
-    //     } else {
-    //       navigate("/login");
-    //       alert("Kullanıcı adınız veya parola hatalı.");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     alert("Giriş başarısız.");
-    //   });
-    /***************************************************************** */
     // try {
     //   const response = await axios.post("https://dummyjson.com/auth/login", {
     //     username,
@@ -43,13 +18,13 @@ function Login() {
     //   // console.log(response);
     //   const data = response.data;
     //   // console.log(data);
-    //   if (data) {
+    //   if (data.token) {
     //     dispatch(loginSuccess(data));
-    //     navigate("/");
     //   } else {
-    //     navigate("/login");
+    //     alert("Kullanıcı adı veya parola hatalı.");
     //   }
     // } catch (error) {
+    //   alert("Kullanıcı adı veya parola hatalı.");
     //   console.log(error);
     // }
     /***************************************************************** */
@@ -62,14 +37,15 @@ function Login() {
         const data = res.data;
         if (data.token) {
           // console.log(data);
+          // console.log(data.token);
           dispatch(loginSuccess(data));
-          navigate("/");
         } else {
-          dispatch(loginFail("Kullanıcı adı veya parola hatalı."));
+          // alert("Kullanıcı adı ya da parola hatalı.");
         }
       })
       .catch((err) => {
-        dispatch(loginFail("Giriş başarısız: " + err.message));
+        alert("Kullanıcı adı ya da parola hatalı.");
+        console.log(err);
       });
   };
 

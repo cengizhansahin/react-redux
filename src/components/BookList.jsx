@@ -45,7 +45,7 @@ function BookList() {
       <div className="container">
         <div className="row justify-content-center">
           {displayBooks.map((book) => (
-            <div className="col-lg-3 col-md-4 col-sm-12 my-3">
+            <div className="col-lg-3 col-md-4 col-sm-12 my-3" key={book.id}>
               <div className="card m-auto rounded shadow">
                 <img
                   className="card-img-top"

@@ -2,7 +2,6 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
   user: null,
-  error: null,
 };
 const userSlice = createSlice({
   name: "user",
@@ -13,10 +12,6 @@ const userSlice = createSlice({
     },
     logoutSuccess: (state) => {
       state.user = null;
-      state.error = null;
-    },
-    loginFail: (state, action) => {
-      state.error = action.payload;
     },
   },
 });
